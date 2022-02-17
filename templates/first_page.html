@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Billing Software</title>
+
+    <link rel="stylesheet" href="./css/bulma.min.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/custom.css">
+    <script src="./scripts/base.js"></script>
+
+</head>
+
+<body onload="stay_center()">
+
+    <div class="window-bar pywebview-drag-region">
+        <div class="window-control">
+            <button class="control-btn minimize" onclick="window_control('minimize')">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+
+            <button class="control-btn min-max" onclick="window_control('rmax')">
+                <i class="fa-solid fa-compress"></i>
+            </button>
+
+            <button class="control-btn close" onclick="window_control('close')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div id="container">
+        <div class="header-container">
+            Smart Billing Software
+        </div>
+
+        <div class="input-container pt-5">
+            <div class="input-padding">
+                <div class="control has-icons-left ">
+                    <input class="input is-primary" type="text" placeholder="Your Shop Name" id="shop_name">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-shop"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="input-padding">
+                <div class="control has-icons-left">
+                    <input class="input is-primary" type="text" placeholder="Shop Address" id="address">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-address-book"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="input-padding">
+                <div class="control has-icons-left ">
+                    <input class="input is-primary" type="text" placeholder="Phone Number" id="number">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="input-padding">
+                <div class="control has-icons-left ">
+                    <input class="input is-primary" type="email" placeholder="Email Adress" id="email">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="input-padding">
+                <div class="control has-icons-left ">
+                    <input class="input is-primary" type="url" placeholder="Website Name" id="website">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-link"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-5 has-text-centered">
+            <button class="button is-primary btn-anim" onclick="next_page()">
+                <b>
+                    Next
+                </b>
+            </button>
+        </div>
+    </div>
+</body>
+
+<script>
+    window.addEventListener("resize", stay_center);
+
+    function stay_center() {
+        let Div = document.getElementById("container");
+        if (window.innerHeight > Div.offsetHeight) {
+            Div.style.marginTop = ((window.innerHeight - Div.offsetHeight) / 2).toString() + "px";
+            console.log(window.innerHeight);
+        }
+    }
+
+    function next_page() {
+
+        let
+            shop_name = document.getElementById("shop_name").value,
+            address = document.getElementById("address").value,
+            number = document.getElementById("number").value,
+            email = document.getElementById("email").value,
+            website = document.getElementById("website").value;
+
+        pywebview.api.shop_info(shop_name, address, number, email, website).then(
+            ()=>{
+                pywebview.api.NextPage("mainPage.html");
+            }
+        );
+
+    }
+
+</script>
+
+</html>

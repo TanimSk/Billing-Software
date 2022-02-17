@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Billing Software</title>
+
+    <link rel="stylesheet" href="./css/bulma.min.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="./css/mainpage.css">
+    <script src="./scripts/base.js"></script>
+    <script src="./scripts/main.js"></script>
+
+</head>
+
+<body>
+
+    <div class="window-bar pywebview-drag-region">
+        <div class="window-control">
+            <button class="control-btn minimize" onclick="window_control('minimize')">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+
+            <button class="control-btn min-max" onclick="window_control('rmax')">
+                <i class="fa-solid fa-compress"></i>
+            </button>
+
+            <button class="control-btn close" onclick="window_control('close')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+    <button class="button is-primary export-btn" id="export_btn" onclick="export_btn()">
+        <span class="icon">
+            <i class="fa-solid fa-file-export"></i>
+        </span>
+        <span>Export</span>
+    </button>
+
+    <div id="mainPage">
+        <header>
+            <h1>Invoice</h1>
+
+            <textarea style="width: 17rem;height: 8rem;" maxlength="60"
+                placeholder="Customer Details &#10; Name &#10; Contact No. &#10; Address"
+                class="style-textarea"></textarea>
+
+            <span>
+                <img alt="" src="./static/img.png">
+                <input type="file" accept="image/*">
+            </span>
+
+        </header>
+
+        <article class="main-body">
+            <h1>Recipient</h1>
+
+            <textarea style="width:15rem;height: 6rem;" placeholder="Owner Details &#10; Name &#10; Contact no."
+                class="style-textarea" maxlength="60" id="owner-info"></textarea>
+
+            <table class="meta">
+                <tr>
+                    <th>Invoice #</th>
+                    <td>
+                        <input style="width: 3rem;" class="style-input" type="text" value="611105">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td style="padding: 0">
+                        <input class="style-input" type="date" style="margin-top: .18rem;">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Amount Due</th>
+                    <td>
+                        <span>
+                            <input style="width: .7rem; font-size: .7rem;" class="style-input" type="text" value="$"
+                                id="prefix">
+                        </span>
+                        <span>600.00</span>
+                    </td>
+                </tr>
+            </table>
+            <table class="inventory">
+                <thead>
+                    <tr>
+                        <th><span>Item</span></th>
+                        <th><span>Description</span></th>
+                        <th><span>Rate</span></th>
+                        <th><span>Quantity</span></th>
+                        <th><span>Price</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a class="cut">-</a>
+                            <input class="style-input style-input-size" type="text" style="width: 7.5rem;" value="Item"
+                                onClick="this.setSelectionRange(0, this.value.length)">
+                        </td>
+                        <td>
+                            <input class="style-input style-input-size" style="width: 7.5rem;" type="text"
+                                value="Description" onClick="this.setSelectionRange(0, this.value.length)">
+                        </td>
+                        <td>
+                            <span>$</span>
+                            <input class="style-input style-input-size" type="text" value="0">
+                        </td>
+                        <td>
+                            <input class="style-input style-input-size" type="text" value="0">
+                        </td>
+                        <td>
+                            <span>$</span>
+                            <input style="border: none;" class="style-input-size" type="text" value="" disabled>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a class="add">+</a>
+
+            <table class="balance">
+                <tr>
+                    <th><span>Total</span></th>
+                    <td><span data-prefix>$</span><span>600.00</span></td>
+                </tr>
+                <tr>
+                    <th><span>Amount Paid</span></th>
+                    <td><span data-prefix>$</span><span>0.00</span></td>
+                </tr>
+                <tr>
+                    <th><span>Balance Due</span></th>
+                    <td><span data-prefix>$</span><span>600.00</span></td>
+                </tr>
+            </table>
+        </article>
+
+        <aside>
+            <br>
+            <h1><span>Additional Notes</span></h1>
+            <div>
+                <p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
+            </div>
+        </aside>
+    </div>
+</body>
+
+
+<script>
+
+    setTimeout(function () {
+        pywebview.api.get_info().then(
+            (res) => {
+str = 
+`Shop name:  ${res['shop_name']}
+Address:  ${res['address']}
+Phone No.  ${res['phone_num']}
+Email:  ${res['email']}
+Website:  ${res['website']}`
+
+                document.getElementById("owner-info").value = str;
+            }
+        );
+    }, 500);
+
+    function export_btn() {
+        window.print();
+    }
+</script>
+
+
+</html>

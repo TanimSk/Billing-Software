@@ -1,0 +1,80 @@
+/* ------- Window Control Bar ------*/
+
+.window-bar{
+    position: fixed;
+    width: 100%;
+    height: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.678);
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.window-control{
+    position: fixed;
+    top: 8px;
+    right: 12px;
+    z-index: 100;
+}
+.control-btn{
+    background-color: transparent;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 2px;
+    border-radius: 50px;
+}
+.close{
+    transition: .1s;
+    color: rgb(255, 92, 92);
+}
+.close:hover{
+    cursor: pointer;
+    background-color: rgb(255, 92, 92);
+    color: whitesmoke;
+}
+
+.min-max{
+    transition: .1s;
+    color: rgb(44, 44, 44);
+}
+.min-max:hover{
+    cursor: pointer;
+    background-color: rgb(54, 54, 54);
+    color: whitesmoke;
+}
+
+.minimize{
+    transition: .1s;
+    color: rgb(44, 44, 44);
+}
+.minimize:hover{
+    cursor: pointer;
+    background-color: rgb(44, 44, 44);
+    color: whitesmoke;
+}
+/*  ---------------------  */
+
+
+.header-container{
+    margin: auto;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2em;
+}
+.input-container{
+    margin: auto;
+    max-width: 32rem;
+}
+.input-padding{
+    padding: 1em 2em 1em 2em;
+}
+.btn-anim{
+    width: 5rem;
+    transition: 0.2s;
+}
+.btn-anim:hover{
+    width: 6rem;
+}
