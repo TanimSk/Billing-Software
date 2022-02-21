@@ -1,4 +1,5 @@
 import webview
+import os
 
 
 class Api:
@@ -10,10 +11,10 @@ class Api:
             self.window.destroy()
 
         elif action == "restore":
-            window.resize(1050, 600)
+            window.toggle_fullscreen()
 
         elif action == "maximize":     
-            window.resize(width, height)
+            window.toggle_fullscreen()
 
         else:
             window.minimize()
@@ -41,4 +42,4 @@ if __name__ == '__main__':
         width=1050, height=600, easy_drag=False
     )
     api.window = window
-    webview.start(debug=True)
+    webview.start()
